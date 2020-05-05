@@ -7,7 +7,11 @@ class GitHubUsers extends React.Component {
 		return (
 			<div>
 				<h2>Users</h2>
-				<UserCard />
+				{
+					this.props.users.map(userData => {
+						return <UserCard key={userData.id} userData={userData}/>
+					})
+				}
 			</div>
 		);
 	}

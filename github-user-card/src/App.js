@@ -10,37 +10,40 @@ class App extends React.Component {
 		users: []
 	}
 
-	// componentDidMount() {
-	// 	axios.get('https://api.github.com/users/jslohner')
-	// 		.then(res => {
-	// 			this.setState({
-	// 				users: [...this.state.users, res.data]
-	// 			});
-	// 			// console.log(this.state.users);
-	// 		})
-	// 		.catch(err => {
-	// 			console.log(err);
-	// 		})
-	//
-	// 	axios.get('https://api.github.com/users/jslohner/followers')
-	// 		.then(res => {
-	// 			res.data.forEach(user => {
-	// 				this.setState({
-	// 					users: [...this.state.users, user]
-	// 				});
-	// 			})
-	// 			// console.log(this.state.users);
-	// 		})
-	// 		.catch(err => {
-	// 			console.log(err);
-	// 		})
-	// }
+	componentDidMount() {
+		this.getUser('jslohner');
+		this.getUserFollowers('jslohner');
+	}
+
+	getUser = user => {
+		axios.get(`https://api.github.com/users/${user}`)
+			.then(res => {
+				this.setState({
+					users: [...this.state.users, res.data]
+				});
+			})
+			.catch(err => {
+				console.log(err);
+			})
+	}
+
+	getUserFollowers = user => {
+		axios.get(`https://api.github.com/users/${user}/followers`)
+			.then(res => {
+				res.data.forEach(user => {
+					this.getUser(user.login);
+				})
+			})
+			.catch(err => {
+				console.log(err);
+			})
+	}
 
 	render() {
 		return (
 			<div className='App'>
 				<h1>GitHub User Cards</h1>
-				<GitHubUsers />
+				<GitHubUsers users={this.state.users}/>
 			</div>
 		);
 	}
