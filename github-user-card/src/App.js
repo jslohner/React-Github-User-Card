@@ -1,26 +1,22 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import GitHubUsers from './components/GitHubUsers.js';
+
+class App extends React.Component {
+	this.state = {
+		mainUser: {},
+		users: []
+	}
+
+	render() {
+		return (
+			<div className='App'>
+				<h1>GitHub User Cards</h1>
+				<GitHubUsers />
+			</div>
+		);
+	}
 }
 
 export default App;
