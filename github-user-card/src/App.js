@@ -1,13 +1,19 @@
 import React from 'react';
+import axios from 'axios';
+
 import './App.css';
 
 import GitHubUsers from './components/GitHubUsers.js';
 
 class App extends React.Component {
-	this.state = {
+	state = {
 		mainUser: {},
 		users: []
 	}
+
+	// componentDidMount() {
+	// 	axios.get()
+	// }
 
 	render() {
 		return (
